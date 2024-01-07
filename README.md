@@ -1,1 +1,2 @@
-# Developers-study-cafe
+# 개발자들의 스터디 카페 
+
