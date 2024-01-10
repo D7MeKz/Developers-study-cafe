@@ -5,6 +5,5 @@ import org.toy.dsc.dto.UserRegisterCommand;
 
 public interface UserService {
     void createUser(UserRegisterCommand command);
-
     User getUserById(Long userId);
 }

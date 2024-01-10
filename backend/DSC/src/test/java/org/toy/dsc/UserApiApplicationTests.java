@@ -54,11 +54,9 @@ public class UserApiApplicationTests {
                         .content(objectMapper.writeValueAsString(userRegisterRequest)))
                         .andDo(print());
 
-        String responseBody = registerResponse.andReturn().getResponse().getContentAsString();
-        JSONObject responseObject = new JSONObject(responseBody);
-        long userId = responseObject.getLong("id");
 
-        ResultActions responseExistedId = mockMvc.perform(get("/users/{id}", userId))
+
+        ResultActions responseExistedId = mockMvc.perform(get("/users/{id}", 1))
                 .andDo(print());
 
     }

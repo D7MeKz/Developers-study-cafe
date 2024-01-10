@@ -1,5 +1,6 @@
 package org.toy.dsc.mapper;
 
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.toy.dsc.domain.User;
 import org.toy.dsc.entity.UserEntity;
@@ -7,6 +8,7 @@ import org.toy.dsc.entity.UserEntity;
 import java.util.Optional;
 
 @Component
+@NoArgsConstructor
 public class UserMapper {
 
     public UserEntity UserToUserEntity(User user){
