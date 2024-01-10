@@ -1,4 +1,4 @@
-package org.toy.dsc.dto;
+package org.toy.dsc.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

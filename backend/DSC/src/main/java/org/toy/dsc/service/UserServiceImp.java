@@ -1,6 +1,7 @@
 package org.toy.dsc.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.toy.dsc.domain.User;
 import org.toy.dsc.dto.UserRegisterCommand;
@@ -22,6 +23,7 @@ public class UserServiceImp implements UserService{
     @Override
     public void createUser(UserRegisterCommand command) {
         userRepository.save(new UserEntity(command.getEmail(), command.getPassword(), command.getUsername()));
+
     }
 
     @Override

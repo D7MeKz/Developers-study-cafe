@@ -1,18 +1,16 @@
 package org.toy.dsc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultMatcher;
-import org.toy.dsc.dto.UserRegisterRequest;
+import org.toy.dsc.dto.request.UserRegisterRequest;
 import org.toy.dsc.service.UserService;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -20,7 +18,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc // MockMVC를 주입받아 테스트에 사용할 수 있다.
@@ -53,8 +50,6 @@ public class UserApiApplicationTests {
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(userRegisterRequest)))
                         .andDo(print());
-
-
 
         ResultActions responseExistedId = mockMvc.perform(get("/users/{id}", 1))
                 .andDo(print());
