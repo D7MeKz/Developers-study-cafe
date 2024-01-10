@@ -5,8 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.toy.dsc.config.DbConfiguration;
 
+@EnableJpaAuditing // Basetime을 위한 Auditing 기능 추가
 @SpringBootApplication
 public class DscApplication {
 
