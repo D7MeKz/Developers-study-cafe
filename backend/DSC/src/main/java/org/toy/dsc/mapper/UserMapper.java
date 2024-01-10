@@ -24,8 +24,7 @@ public class UserMapper {
                 userEntity.getId(),
                 userEntity.getEmail(),
                 userEntity.getUsername(),
-                userEntity.getPassword(),
-                userEntity.getCreatedDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss:SSS"))
+                userEntity.getPassword()
         );
         return user;
     }
