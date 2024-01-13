@@ -8,6 +8,7 @@ import org.toy.dsc.constant.ResponseMessage;
 import org.toy.dsc.constant.StatusCode;
 import org.toy.dsc.domain.User;
 import org.toy.dsc.dto.UserRegisterCommand;
+import org.toy.dsc.dto.request.UserLoginRequest;
 import org.toy.dsc.dto.request.UserRegisterRequest;
 import org.toy.dsc.service.UserService;
 import org.toy.dsc.utils.DefaultResponse;
@@ -36,5 +37,10 @@ public class UserController {
         User user = userService.getUserById(id);
         System.out.println(user.toString());
         return new ResponseEntity(DefaultResponse.response(StatusCode.OK,ResponseMessage.CREATED_USER,user), HttpStatus.OK);
+    }
+
+    @GetMapping("login")
+    public ResponseEntity loginUser(@RequestBody UserLoginRequest request){
+        return userService.loginUserByEmail(request.getEmail());
     }
 }
