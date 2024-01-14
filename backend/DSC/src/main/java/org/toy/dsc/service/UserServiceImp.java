@@ -10,6 +10,7 @@ import org.toy.dsc.constant.StatusCode;
 import org.toy.dsc.domain.User;
 import org.toy.dsc.dto.UserRegisterCommand;
 import org.toy.dsc.dto.request.UserLoginRequest;
+import org.toy.dsc.dto.response.UserLoginResponse;
 import org.toy.dsc.entity.UserEntity;
 import org.toy.dsc.mapper.UserMapper;
 import org.toy.dsc.repository.UserRepository;
@@ -29,7 +30,6 @@ public class UserServiceImp implements UserService{
     @Override
     public void createUser(UserRegisterCommand command) {
         userRepository.save(new UserEntity(command.getEmail(), command.getPassword(), command.getUsername()));
-
     }
 
     @Override
@@ -40,9 +40,10 @@ public class UserServiceImp implements UserService{
 
     @Override
     public ResponseEntity loginUserByEmail(String email) {
-        Boolean isValidUser = userRepository.isValidUserByEmail(email);
-        if (isValidUser){
-            return new ResponseEntity(DefaultResponse.response(StatusCode.OK, ResponseMessage.CREATED_USER), HttpStatus.OK);
+        String userId = userRepository.getIdByUserEmail(email);
+        UserLoginResponse userLoginResponse = new UserLoginResponse(userId);
+        if (userId != null){
+            return new ResponseEntity(DefaultResponse.response(StatusCode.OK, ResponseMessage.CREATED_USER, userLoginResponse), HttpStatus.OK);
         }else {
             return new ResponseEntity(DefaultResponse.response(StatusCode.INTERNAL_SERVER_ERROR, ResponseMessage.NOT_FOUND_DATA), HttpStatus.INTERNAL_SERVER_ERROR);
         }

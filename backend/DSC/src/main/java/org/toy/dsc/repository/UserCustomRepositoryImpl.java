@@ -11,22 +11,22 @@ import java.util.List;
 public class UserCustomRepositoryImpl implements UserCustomRepository {
 
     private final JPAQueryFactory jpaQueryFactory;
-    private QUserEntity userEntity = QUserEntity.userEntity;
+    private final QUserEntity userEntity = QUserEntity.userEntity;
     public UserCustomRepositoryImpl(JPAQueryFactory jpaQueryFactory){
         this.jpaQueryFactory = jpaQueryFactory;
     }
 
     @Override
-    public Boolean isValidUserByEmail(String email) {
-         List<UserEntity> targetUser = jpaQueryFactory.selectFrom(userEntity)
+    public String getIdByUserEmail(String email) {
+         UserEntity targetUser = jpaQueryFactory.selectFrom(userEntity)
                 .from(userEntity)
                 .where(userEntity.email.eq(email))
-                .fetch();
+                .fetchOne();
 
-         if (!targetUser.isEmpty()){
-             return true;
-         }else{
-             return false; // Invalid User
-         }
+        if (targetUser != null){
+            return String.valueOf(targetUser.getId());
+        }else{
+            return null;
+        }
     }
 }
