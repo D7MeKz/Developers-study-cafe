@@ -11,7 +11,7 @@ import org.toy.dsc.dto.UserRegisterCommand;
 import org.toy.dsc.dto.request.UserLoginRequest;
 import org.toy.dsc.dto.request.UserRegisterRequest;
 import org.toy.dsc.service.UserService;
-import org.toy.dsc.utils.DefaultResponse;
+import org.toy.dsc.dto.response.DefaultResponse;
 
 @RestController
 @RequestMapping("/users/")
@@ -42,5 +42,11 @@ public class UserController {
     @PostMapping("login")
     public ResponseEntity loginUser(@RequestBody UserLoginRequest request){
         return userService.loginUserByEmail(request.getEmail());
+    }
+
+    @GetMapping("logout/{id}")
+    public ResponseEntity logoutUser(@PathVariable("id") String id){
+        DefaultResponse defaultResponse = userService.logoutById(id);
+        return new ResponseEntity(defaultResponse,defaultResponse.getHttpStatus());
     }
 }

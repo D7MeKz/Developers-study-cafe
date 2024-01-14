@@ -81,6 +81,9 @@ public class UserApiApplicationTests {
                         .content(objectMapper.writeValueAsString(inValidRequest)))
                 .andDo(print());
 
+        ResultActions logoutResult= mockMvc.perform(get("/users/logout/{id}", 1))
+                .andDo(print());
+
 
     }
 
