@@ -1,8 +1,9 @@
-package org.toy.dsc.utils;
+package org.toy.dsc.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.http.HttpStatus;
 
 @Data
 @AllArgsConstructor
@@ -28,5 +29,8 @@ public class DefaultResponse<T>{
                 .statusCode(statusCode)
                 .responseMessage(responseMessage)
                 .build();
+    }
+    public HttpStatus getHttpStatus() {
+        return HttpStatus.valueOf(statusCode);
     }
 }
