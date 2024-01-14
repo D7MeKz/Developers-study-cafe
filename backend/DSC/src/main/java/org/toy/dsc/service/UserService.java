@@ -9,6 +9,5 @@ import org.toy.dsc.utils.DefaultResponse;
 public interface UserService {
     void createUser(UserRegisterCommand command);
     User getUserById(Long userId);
-
     ResponseEntity loginUserByEmail(String email);
 }

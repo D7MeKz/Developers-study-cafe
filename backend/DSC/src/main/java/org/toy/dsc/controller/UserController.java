@@ -39,7 +39,7 @@ public class UserController {
         return new ResponseEntity(DefaultResponse.response(StatusCode.OK,ResponseMessage.CREATED_USER,user), HttpStatus.OK);
     }
 
-    @GetMapping("login")
+    @PostMapping("login")
     public ResponseEntity loginUser(@RequestBody UserLoginRequest request){
         return userService.loginUserByEmail(request.getEmail());
     }
