@@ -1,22 +1,10 @@
 ## Changes
-
-### Resolves
+- 
+## Resolves
 <!---- Resolves: #(Isuue Number) -->
-
-## PR Type
-- [ ] Feature
-- [ ] Bug
-- [ ] Design
-- [ ] Chore 
-- [ ] Refactor
-- [ ] Comment
-- [ ] Docs
-- [ ] Test 
-- [ ] Build
-- [ ] Rename file
-- [ ] Delete file
+- Nop
 
 ## PR Checklist
-- [ ] Nop
+- [ ] Test
 
 ## Screenshot
