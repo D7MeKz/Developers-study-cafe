@@ -10,6 +10,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.ResultMatcher;
+import org.toy.dsc.dto.request.UserLoginRequest;
 import org.toy.dsc.dto.request.UserRegisterRequest;
 import org.toy.dsc.service.UserService;
 
@@ -43,7 +44,7 @@ public class UserApiApplicationTests {
     }
 
     @Test
-    public void testGetUser() throws Exception{
+    public void RegisterUser() throws Exception{
         // Sample data
         UserRegisterRequest userRegisterRequest = new UserRegisterRequest("sample@naver.com","helloworld","wow");
         ResultActions registerResponse =  mockMvc.perform(post("/users/register")
@@ -55,4 +56,35 @@ public class UserApiApplicationTests {
                 .andDo(print());
 
     }
+
+    @Test
+    public void loginUser() throws Exception{
+        // Register
+        UserRegisterRequest userRegisterRequest = new UserRegisterRequest("sample@naver.com","helloworld","wow");
+        ResultActions registerResponse =  mockMvc.perform(post("/users/register")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(userRegisterRequest)))
+                .andDo(print()); // 테스트 과정을 콘솔에 출력한다.
+
+        // Login
+        // Valid
+        UserLoginRequest validRequest = new UserLoginRequest("sample@naver.com","hellworld");
+        ResultActions validResponse = mockMvc.perform(post("/users/login")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(validRequest)))
+                .andDo(print());
+
+        // Invalid
+        UserLoginRequest inValidRequest = new UserLoginRequest("sample@daum.com","hellworld");
+        ResultActions inValidResponse = mockMvc.perform(post("/users/login")
+                        .contentType("application/json")
+                        .content(objectMapper.writeValueAsString(inValidRequest)))
+                .andDo(print());
+
+        ResultActions logoutResult= mockMvc.perform(get("/users/logout/{id}", 1))
+                .andDo(print());
+
+
+    }
+
 }
