@@ -29,14 +29,14 @@ public class UserController {
                 .build();
 
         userService.createUser(command);
-        return new ResponseEntity(DefaultResponse.response(StatusCode.OK, ResponseMessage.CREATED_USER), HttpStatus.OK);
+        return new ResponseEntity(DefaultResponse.response(StatusCode.OK, "Register Success"), HttpStatus.OK);
     }
 
     @GetMapping("{id}")
     public ResponseEntity getUserById(@PathVariable("id") long id){
         User user = userService.getUserById(id);
         System.out.println(user.toString());
-        return new ResponseEntity(DefaultResponse.response(StatusCode.OK,ResponseMessage.CREATED_USER,user), HttpStatus.OK);
+        return new ResponseEntity(DefaultResponse.response(StatusCode.OK,"Succes",user), HttpStatus.OK);
     }
 
     @PostMapping("login")
