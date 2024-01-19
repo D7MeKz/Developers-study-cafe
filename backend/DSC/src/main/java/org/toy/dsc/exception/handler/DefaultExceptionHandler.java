@@ -17,5 +17,4 @@ public class DefaultExceptionHandler extends ResponseEntityExceptionHandler {
                 .body(new DefaultErrorResponse(responseMessage, keyword));
     }
 
-
 }

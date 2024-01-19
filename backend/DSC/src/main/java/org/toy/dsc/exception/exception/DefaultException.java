@@ -14,6 +14,5 @@ public class DefaultException extends RuntimeException{
         this.keyword = keyword;
     }
 
-    // Message Unexpected things.
 
 }

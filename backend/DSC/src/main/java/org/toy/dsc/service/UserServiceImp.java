@@ -44,14 +44,9 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    public ResponseEntity loginUserByEmail(String email) {
+    public UserLoginResponse loginUserByEmail(String email) {
         String userId = userRepository.getIdByUserEmail(email);
-        UserLoginResponse userLoginResponse = new UserLoginResponse(userId);
-        if (userId != null){
-            return new ResponseEntity(DefaultResponse.response(StatusCode.OK, ResponseMessage.CREATED_USER, userLoginResponse), HttpStatus.OK);
-        }else {
-            return new ResponseEntity(DefaultResponse.response(StatusCode.INTERNAL_SERVER_ERROR, ResponseMessage.NOT_FOUND_DATA), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return new UserLoginResponse(userId);
     }
 
     @Override
