@@ -10,6 +10,7 @@ import org.toy.dsc.domain.User;
 import org.toy.dsc.dto.UserRegisterCommand;
 import org.toy.dsc.dto.request.UserLoginRequest;
 import org.toy.dsc.dto.request.UserRegisterRequest;
+import org.toy.dsc.dto.response.UserLoginResponse;
 import org.toy.dsc.service.UserService;
 import org.toy.dsc.dto.response.DefaultResponse;
 
@@ -29,24 +30,29 @@ public class UserController {
                 .build();
 
         userService.createUser(command);
-        return new ResponseEntity(DefaultResponse.response(StatusCode.OK, ResponseMessage.CREATED_USER), HttpStatus.OK);
+        return ResponseEntity.ok(DefaultResponse.response(StatusCode.OK,"Success"));
     }
 
     @GetMapping("{id}")
     public ResponseEntity getUserById(@PathVariable("id") long id){
         User user = userService.getUserById(id);
         System.out.println(user.toString());
-        return new ResponseEntity(DefaultResponse.response(StatusCode.OK,ResponseMessage.CREATED_USER,user), HttpStatus.OK);
+        return ResponseEntity.ok(DefaultResponse.response(StatusCode.OK,"Success"));
     }
 
     @PostMapping("login")
     public ResponseEntity loginUser(@RequestBody UserLoginRequest request){
-        return userService.loginUserByEmail(request.getEmail());
+        UserLoginResponse userLoginResponse = userService.loginUserByEmail(request.getEmail());
+        return ResponseEntity.ok(userLoginResponse);
+
     }
 
     @GetMapping("logout/{id}")
     public ResponseEntity logoutUser(@PathVariable("id") String id){
-        DefaultResponse defaultResponse = userService.logoutById(id);
-        return new ResponseEntity(defaultResponse,defaultResponse.getHttpStatus());
+        Boolean isExist = userService.logoutById(id);
+        if (isExist){
+            return ResponseEntity.ok(DefaultResponse.response(StatusCode.OK,"Success"));
+        }
+        return  ResponseEntity.internalServerError().body(ResponseEntity.ok(DefaultResponse.response(StatusCode.NOT_FOUND,"User not found")));
     }
 }
