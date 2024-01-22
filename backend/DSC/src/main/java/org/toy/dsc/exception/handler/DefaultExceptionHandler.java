@@ -12,9 +12,9 @@ import org.toy.dsc.exception.exception.DefaultException;
 public class DefaultExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {DefaultException.class})
-    public ResponseEntity<DefaultErrorResponse> handleDefaultException(ResponseMessage responseMessage, String keyword){
-        return ResponseEntity.status(responseMessage.getHttpStatus().value())
-                .body(new DefaultErrorResponse(responseMessage, keyword));
+    public ResponseEntity<DefaultErrorResponse> handleDefaultException(DefaultException ex){
+        return ResponseEntity.status(ex.getResponseMessage().getHttpStatus().value())
+                .body(new DefaultErrorResponse(ex.getResponseMessage(),ex.getKeyword()));
     }
 
 }
