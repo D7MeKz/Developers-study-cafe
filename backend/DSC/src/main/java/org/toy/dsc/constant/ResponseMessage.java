@@ -1,11 +1,22 @@
 package org.toy.dsc.constant;
 
-public class ResponseMessage {
-    public static final String NOT_FOUND_DATA = "데이터를 찾을 수 없습니다.";
-    public static final String CREATED_USER = "데이터 생성에 성공하셨습니다.";
-    public static final String NOT_EMAIL_CONTENT = "이메일이 존재하지 않습니다.";
-    public static final String LOGOUT_SUCCESS = "로그아웃 성공";
-    public static final String LOGOUT_FAIL = "로그아웃 실패";
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.springframework.http.HttpStatus;
 
-    public static final String USER_DID_NOT_EXIST = "사용자가 존재하지 않습니다.";
+@Getter
+@RequiredArgsConstructor
+public enum ResponseMessage {
+    BAD_REQUEST(HttpStatus.BAD_REQUEST, "Invalid request."),
+    UNAUTHORIZED_REQUEST(HttpStatus.UNAUTHORIZED, "Unauthorized."),
+    FORBIDDEN_ACCESS(HttpStatus.FORBIDDEN, "Forbidden."),
+    NOT_FOUND(HttpStatus.NOT_FOUND, "Not found."),
+    METHOD_NOT_ALLOWED(HttpStatus.METHOD_NOT_ALLOWED, "Not allowed method."),
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Server error."),
+    DATA_ACCESS_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Data Access Error"),
+    DB_UNEXPECTED_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Unexpected Error");
+
+    private final HttpStatus httpStatus;
+    private final String message;
 }
