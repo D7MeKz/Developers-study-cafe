@@ -1,19 +1,18 @@
-package org.toy.dsc.dto.request;
+package org.toy.dsc.dto.response;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.toy.dsc.entity.UserEntity;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class CreatePostRequest {
-    private Long userId;
+public class CreatePostResponse {
+    private String postId;
     private String title;
     private String content;
-
-//    public UserEntity toEntity(); //
+    // TODO : Created time, Modified Time
 }

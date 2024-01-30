@@ -1,4 +1,4 @@
-package org.toy.dsc.dto.response;
+package org.toy.dsc.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,20 +12,17 @@ import java.time.LocalDateTime;
 public class DefaultErrorResponse {
     private int statusCode;
     private String error;
-    private String keyword;
     private String message;
     private LocalDateTime timestamp;
 
-
-
-    public DefaultErrorResponse(ResponseMessage responseMessage, String keyword){
+    public DefaultErrorResponse(ResponseMessage responseMessage){
         this.statusCode = responseMessage.getHttpStatus().value();
         this.error = responseMessage.getHttpStatus().name();
-        this.keyword = keyword;
         this.message = responseMessage.getMessage();
         this.timestamp = LocalDateTime.now();
-
     }
 
-
+    public DefaultErrorResponse(String message) {
+        this.message = message;
+    }
 }
